@@ -30,7 +30,6 @@ Calculos.getFactorial = (req,res) => {
     }else {
         res.status(400).json({status:"no", response:"Error al calcular"})
     }
-
 }
 
 Calculos.getRectangulo = (req,res) => {
@@ -39,9 +38,9 @@ Calculos.getRectangulo = (req,res) => {
 
     if(b !== undefined && h !== undefined && b > 0 && h > 0 && !isNaN(b) && !isNaN(h)){
         var area = b*h
-        var perim = b*2+h*2
+        var per = b*2+h*2
 
-        res.status(200).json({status:"yes", area, perim})
+        res.status(200).json({status:"yes", area, per: per})
     }else if (b== undefined || h== undefined){
         res.status(400).json({status:"no", response:"Ingrese ambos números para el cálculo"})
     }else {
@@ -54,28 +53,29 @@ Calculos.getCirculo = (req,res) => {
 
     if(r !== undefined && r > 0 && !isNaN(r)){
         var area = Math.PI*Math.pow(r,2)
-        var perim = 2*Math.PI*r
+        var per = 2*Math.PI*r
 
-        res.status(200).json({status:"yes", area, perim})
-    }else if (n!== undefined){
+        res.status(200).json({status:"yes", area, per: per})
+    }else if (r== undefined){
         res.status(400).json({status:"no", response:"Ingrese un número para el cálculo"})
     }else {
         res.status(400).json({status:"no", response:"Error al calcular"})
     }
-
 }
 
 Calculos.getTriangulo = (req,res) => {
-    var base = req.headers['base']
-    var altura = req.headers['altura']
-    var lado1 = req.headers['lado1']
-    var lado2 = req.headers['lado2']
+    var a = req.headers['ladoa']
+    var b = req.headers['ladobase']
+    var c = req.headers['ladoc']
+    var h = req.headers['altura']
 
-    if(base !== undefined && base > 0 && altura !== undefined && lado1 !== undefined && lado1 > 0 && lado2 !== undefined && lado2 > 0 && altura > 0 && !isNaN(base) && !isNaN(altura) && !isNaN(lado1) && !isNaN(lado2)){
-        var area = base*altura/2
-        var perim = base+lado1+lado2
+    if(a!== undefined && b!== undefined && c!== undefined && h!== undefined
+        && a > 0 && b > 0 && c > 0 && h > 0
+        && !isNaN(a) && !isNaN(b)&& !isNaN(c) && !isNaN(h) ){
+        var area = b*h/2
+        var per = a+b+c
 
-        res.status(200).json({status:"yes", area, perim})
+        res.status(200).json({status:"yes", area, per: per})
     }else if (n!== undefined){
         res.status(400).json({status:"no", response:"Ingrese un número para el cálculo"})
     }else {
