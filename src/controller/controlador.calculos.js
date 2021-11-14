@@ -66,18 +66,18 @@ Calculos.getCirculo = (req,res) => {
 
 Calculos.getTriangulo = (req,res) => {
     var a = req.body.ladoa
-    var b = req.body.ladobase
+    var b = req.body.ladob
     var c = req.body.ladoc
-    var h = req.body.altura
 
-    if(a!== undefined && b!== undefined && c!== undefined && h!== undefined
-        && a > 0 && b > 0 && c > 0 && h > 0
-        && !isNaN(a) && !isNaN(b)&& !isNaN(c) && !isNaN(h) ){
-        var area = b*h/2
+    if(a!== undefined && b!== undefined && c!== undefined
+        && a > 0 && b > 0 && c > 0
+        && !isNaN(a) && !isNaN(b)&& !isNaN(c)){
         var per = a+b+c
+        var sp= per/2;
+        var area = Math.sqrt(sp*(sp-a)*(sp-b)*(sp-c))
 
         res.status(200).json({status:"yes", area: area, per: per})
-    }else if (a== undefined && b== undefined && c== undefined && h== undefined){
+    }else if (a== undefined && b== undefined && c== undefined){
         res.status(400).json({status:"no", response:"Llene todos los campos"})
     }else {
         res.status(400).json({status:"no", response:"Error al calcular"})
