@@ -11,7 +11,7 @@ app.use(bodyparser.json())
 app.use(cors({origin:true}))
 
 //Declaracion de ruta para manejo de api
-app.use('/api/',require('./routes/ruta.calculos'))
+app.use('/',require('./routes/ruta.calculos'))
 
 
 //start server

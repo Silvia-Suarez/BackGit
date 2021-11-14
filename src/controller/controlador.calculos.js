@@ -1,12 +1,12 @@
 const Calculos = {}
 
 Calculos.getFibonacci = (req,res) => {
-    var n = req.headers('numero');
+    var n = req.body.numero;
     var serie = [];
-    serie[0]= 0;
-    serie[2]=1;
-    if(!isNaN(n) && n>0 && n!== undefined){
-        for (let i = 2; i <= n; i++) {
+    serie[0]=0;
+    serie[1]=1;
+    if(!isNaN(n) && n>=0 && n!== undefined){
+        for (var i = 2; i <= n; i++) {
             serie[i] = serie[i - 2] + serie[i - 1];
         }
         res.status(200).json({status:"yes", nums: serie})
@@ -18,13 +18,13 @@ Calculos.getFibonacci = (req,res) => {
 }
 
 Calculos.getFactorial = (req,res) => {
-    var n = req.headers('numero')
-    var res = 1
-    if(!isNaN(n) && n > 0 && n!== undefined){
+    var n = req.body.numero
+    var resul = 1
+    if(!isNaN(n) && n >= 0 && n!== undefined){
         for(var i=1; i<=n; i++ ){
-            res = res*i;
+            resul = resul*i;
         }
-        res.status(200).json({status:"yes", fact: res})
+        res.status(200).json({status:"yes", fact: resul})
     }else if (n== undefined){
         res.status(400).json({status:"no", response:"Ingrese un número para el cálculo"})
     }else {
@@ -33,14 +33,15 @@ Calculos.getFactorial = (req,res) => {
 }
 
 Calculos.getRectangulo = (req,res) => {
-    var b = req.headers['base']
-    var h = req.headers['altura']
+    var b = req.body.base
+    var h = req.body.altura
 
-    if(b !== undefined && h !== undefined && b > 0 && h > 0 && !isNaN(b) && !isNaN(h)){
+    if(b!== undefined && h!== undefined && b >= 0 && h >= 0 && !isNaN(b) && !isNaN(h)){
+
         var area = b*h
         var per = b*2+h*2
 
-        res.status(200).json({status:"yes", area, per: per})
+        res.status(200).json({status:"yes", area: area, per: per})
     }else if (b== undefined || h== undefined){
         res.status(400).json({status:"no", response:"Ingrese ambos números para el cálculo"})
     }else {
@@ -49,25 +50,25 @@ Calculos.getRectangulo = (req,res) => {
 }
 
 Calculos.getCirculo = (req,res) => {
-    var r = req.headers['radio']
+    var r = req.body.radio
 
-    if(r !== undefined && r > 0 && !isNaN(r)){
+    if(r !== undefined && r >= 0 && !isNaN(r)){
         var area = Math.PI*Math.pow(r,2)
         var per = 2*Math.PI*r
 
-        res.status(200).json({status:"yes", area, per: per})
+        res.status(200).json({status:"yes", area: area, per: per})
     }else if (r== undefined){
-        res.status(400).json({status:"no", response:"Ingrese un número para el cálculo"})
+        res.status(400).json({status:"no", response:"Ingrese un número "})
     }else {
         res.status(400).json({status:"no", response:"Error al calcular"})
     }
 }
 
 Calculos.getTriangulo = (req,res) => {
-    var a = req.headers['ladoa']
-    var b = req.headers['ladobase']
-    var c = req.headers['ladoc']
-    var h = req.headers['altura']
+    var a = req.body.ladoa
+    var b = req.body.ladobase
+    var c = req.body.ladoc
+    var h = req.body.altura
 
     if(a!== undefined && b!== undefined && c!== undefined && h!== undefined
         && a > 0 && b > 0 && c > 0 && h > 0
@@ -75,9 +76,9 @@ Calculos.getTriangulo = (req,res) => {
         var area = b*h/2
         var per = a+b+c
 
-        res.status(200).json({status:"yes", area, per: per})
-    }else if (n!== undefined){
-        res.status(400).json({status:"no", response:"Ingrese un número para el cálculo"})
+        res.status(200).json({status:"yes", area: area, per: per})
+    }else if (a== undefined && b== undefined && c== undefined && h== undefined){
+        res.status(400).json({status:"no", response:"Llene todos los campos"})
     }else {
         res.status(400).json({status:"no", response:"Error al calcular"})
     }
