@@ -2,10 +2,10 @@ const request = require("supertest");
 const app = require("../src/index");
 
 describe("triangulo", () => {
-    it("good data", (done) => {
+    it("ideal", (done) => {
         request(app)
             .post("/triangulo")
-            .send({ ladoa: 10, ladob: 10, ladoc: 10 })
+            .send({ ladoa: 4, ladob: 4, ladoc: 3 })
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .expect(200)
@@ -13,12 +13,12 @@ describe("triangulo", () => {
                 if (err) return done(err);
                 done();
             });
-    }).timeout(100000);
+    }).timeout(10000);
 
-    it("bad data one larger", (done) => {
+    it("numero negativo", (done) => {
         request(app)
             .post("/triangulo")
-            .send({ ladoa: 100, ladob: 10, ladoc: 10 })
+            .send({ ladoa: -3, ladob: 5 ladoc: 10 })
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .expect(400)
@@ -26,12 +26,12 @@ describe("triangulo", () => {
                 if (err) return done(err);
                 done();
             });
-    }).timeout(100000);
+    }).timeout(10000);
 
-    it("bad data negative", (done) => {
+    it("nulo", (done) => {
         request(app)
             .post("/triangulo")
-            .send({ ladoa: -10, ladob: 10, ladoc: 10 })
+            .send({})
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .expect(400)
@@ -39,5 +39,5 @@ describe("triangulo", () => {
                 if (err) return done(err);
                 done();
             });
-    }).timeout(100000);
+    }).timeout(10000);
 });
