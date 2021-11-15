@@ -77,8 +77,9 @@ Calculos.getTriangulo = (req, res) => {
         var area = Math.sqrt(sp * (sp - a) * (sp - b) * (sp - c));
         if ((a != 0 || b != 0 || c != 0) && isNaN(area)) {
             res.status(400).json({status: "no", response: "Estas medidas no cumplen con las propiedades de un triángulo"})
-        } else
+        } else{
             res.status(200).json({status: "yes", area: area, per: per})
+        }
     } else if (a == undefined && b == undefined && c == undefined) {
         res.status(400).json({status: "no", response: "Llene todos los campos"})
     } else {
