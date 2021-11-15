@@ -2,7 +2,7 @@ const request = require("supertest");
 const app = require("../src/index");
 
 describe("rectangulo", () => {
-    it("good data", (done) => {
+    it("ideal", (done) => {
         request(app)
             .post("/rectangulo")
             .send({ base: 10, altura: 10 })
@@ -13,9 +13,9 @@ describe("rectangulo", () => {
                 if (err) return done(err);
                 done();
             });
-    }).timeout(100000);
+    }).timeout(10000);
 
-    it("bad data negative", (done) => {
+    it("numero negativo", (done) => {
         request(app)
             .post("/rectangulo")
             .send({ base: 100, altura: -10 })
@@ -26,9 +26,9 @@ describe("rectangulo", () => {
                 if (err) return done(err);
                 done();
             });
-    }).timeout(100000);
+    }).timeout(10000);
 
-    it("no data", (done) => {
+    it("nulo", (done) => {
         request(app)
             .post("/rectangulo")
             .send({})
@@ -39,5 +39,5 @@ describe("rectangulo", () => {
                 if (err) return done(err);
                 done();
             });
-    }).timeout(100000);
+    }).timeout(10000);
 });
