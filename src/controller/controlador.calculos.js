@@ -1,7 +1,7 @@
 const Calculos = {}
 
 Calculos.getFibonacci = (req, res) => {
-    var n = req.body.numero;
+    var n = parseInt(req.body.numero);
     var serie = [];
     serie[0] = 0;
     serie[1] = 1;
@@ -18,7 +18,7 @@ Calculos.getFibonacci = (req, res) => {
 }
 
 Calculos.getFactorial = (req, res) => {
-    var n = req.body.numero
+    var n = parseInt(req.body.numero)
     var resul = 1
     if (!isNaN(n) && n >= 0 && n !== undefined && n<=170) {
         for (var i = 1; i <= n; i++) {
@@ -33,8 +33,8 @@ Calculos.getFactorial = (req, res) => {
 }
 
 Calculos.getRectangulo = (req, res) => {
-    var b = req.body.base
-    var h = req.body.altura
+    var b = parseInt(req.body.base)
+    var h = parseInt(req.body.altura)
 
     if (b !== undefined && h !== undefined && b >= 0 && h >= 0 && !isNaN(b) && !isNaN(h)) {
 
@@ -50,7 +50,7 @@ Calculos.getRectangulo = (req, res) => {
 }
 
 Calculos.getCirculo = (req, res) => {
-    var r = req.body.radio
+    var r = parseInt(req.body.radio)
 
     if (r !== undefined && r >= 0 && !isNaN(r)) {
         var area = Math.PI * Math.pow(r, 2)
